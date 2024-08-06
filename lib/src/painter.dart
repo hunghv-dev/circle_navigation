@@ -42,7 +42,7 @@ class Painter extends CustomPainter {
     canvas.drawPath(navPath, navPaint);
 
     canvas.drawCircle(
-        Offset(circleX, 0), circleWidth / 2, Paint()..color = Colors.green);
+        Offset(circleX, 0), circleWidth / 2, Paint()..color = Colors.green.withOpacity(0.5));
   }
 
   @override
