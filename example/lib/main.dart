@@ -16,8 +16,39 @@ class _MyAppState extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Container(),
-      bottomNavigationBar: const CircleNavigation( ),
+      bottomNavigationBar: CircleNavigation(
+        items: [
+          Item(
+              icon: const Icon(
+                Icons.home,
+                color: Colors.white,
+                size: 30,
+              ),
+              label: 'Home'),
+          Item(
+              icon: const Icon(
+                Icons.account_circle,
+                color: Colors.white,
+                size: 30,
+              ),
+              label: 'User'),
+          Item(
+              icon: const Icon(
+                Icons.settings,
+                color: Colors.white,
+                size: 30,
+              ),
+              label: 'Settings'),
+        ],
+        textStyle: const TextStyle(
+          color: Colors.white,
+          fontSize: 16,
+          fontWeight: FontWeight.bold,
+        ),
+        circleColor: Colors.green,
+        navColor: Colors.lightBlue,
+        onChange: (_) {},
+      ),
     );
   }
 }
