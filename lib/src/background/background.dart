@@ -3,16 +3,37 @@ import 'painter.dart';
 import '../utils.dart';
 
 class Background extends StatefulWidget {
+  /// Current index of the item
   final int index;
+
+  /// Total number of items
   final int total;
+
+  /// Optional spacing between items
   final double? itemSpacing;
+
+  /// Animation curve
   final Curve curve;
+
+  /// Duration of the animation in milliseconds
   final int duration;
+
+  /// Width of the circle
   final double circleWidth;
+
+  /// Space margin around the circle
   final double circleMargin;
+
+  /// Radius of the outline both sides below the circle
   final double outlineRadius;
+
+  /// Corner radius of navigation bar
   final BorderRadius cornerRadius;
+
+  /// Color of the navigation bar
   final Color navColor;
+
+  /// Color of the circle
   final Color circleColor;
 
   const Background({
@@ -38,6 +59,7 @@ class _BackgroundState extends State<Background>
     with SingleTickerProviderStateMixin {
   late final AnimationController _animationController;
 
+  // Calculate the animation percent value based on itemSpacing, current index and total items
   double get _value =>
       context.percent(widget.itemSpacing, widget.index, widget.total);
 
@@ -48,12 +70,14 @@ class _BackgroundState extends State<Background>
       vsync: this,
       duration: Duration(milliseconds: widget.duration),
     );
+    // Set the initial value of the animation controller after the first frame
     WidgetsBinding.instance
         .addPostFrameCallback((_) => _animationController.value = _value);
   }
 
   @override
   void didUpdateWidget(covariant Background oldWidget) {
+    // If the index changes, stop the current animation and animate to the new value
     if (widget.index != oldWidget.index) {
       _animationController.stop();
       _animationController.animateTo(_value, curve: widget.curve);
@@ -63,6 +87,7 @@ class _BackgroundState extends State<Background>
 
   @override
   void dispose() {
+    // Dispose of the animation controller when the widget is removed from the tree
     _animationController.dispose();
     super.dispose();
   }

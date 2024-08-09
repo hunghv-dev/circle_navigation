@@ -2,14 +2,31 @@ import 'package:flutter/material.dart';
 import 'item.dart';
 
 class NavItem extends StatelessWidget {
+  /// The item to be displayed
   final Item item;
+
+  /// Optional text style for the label
   final TextStyle? textStyle;
+
+  /// Space padding from label to icon of item
   final double textPadding;
+
+  /// Callback for tap to item
   final VoidCallback? onTap;
+
+  /// Whether the item is selected
   final bool selected;
+
+  /// Width of the circle
   final double circleWidth;
+
+  /// Space margin around the circle
   final double circleMargin;
+
+  /// Animation curve
   final Curve curve;
+
+  /// Duration of the animation
   final int duration;
 
   const NavItem({
@@ -31,6 +48,7 @@ class NavItem extends StatelessWidget {
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
+            // Vertical animated slide for the icon
             AnimatedSlide(
               offset: Offset(0, selected ? -0.5 : 1),
               duration: Duration(milliseconds: (duration * 1.1).toInt()),
@@ -42,12 +60,14 @@ class NavItem extends StatelessWidget {
               ),
             ),
             SizedBox(height: circleWidth / 2 + circleMargin),
+            // Animated opacity for the label
             AnimatedOpacity(
               opacity: selected ? 1 : 0,
               duration: Duration(milliseconds: (duration * 0.5).toInt()),
               curve: curve,
               child: Padding(
                 padding: EdgeInsets.only(top: textPadding),
+                // Vertical animated slide for the label
                 child: AnimatedSlide(
                   offset: Offset(0, selected ? -1 : 1),
                   duration: Duration(milliseconds: (duration * 1.2).toInt()),

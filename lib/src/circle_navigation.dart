@@ -5,20 +5,49 @@ import 'item/nav_item.dart';
 import 'utils.dart';
 
 class CircleNavigation extends StatefulWidget {
+  /// Initial index of the selected item
   final int initIndex;
+
+  /// List of navigation items
   final List<Item> items;
+
+  /// Callback when the selected item changes
   final ValueSetter<int> onChange;
+
+  /// Height of the navigation bar
   final double height;
+
+  /// Optional horizontal spacing between items
   final double? itemSpacing;
+
+  /// Width of the circle
   final double circleWidth;
+
+  /// Space margin around the circle
   final double circleMargin;
+
+  /// Radius of the outline both sides below the circle
   final double outlineRadius;
+
+  /// Corner radius of navigation bar
   final BorderRadius cornerRadius;
+
+  /// Color of the navigation bar
   final Color navColor;
+
+  /// Color of the circle
   final Color circleColor;
+
+  /// Text style for the item labels
   final TextStyle? textStyle;
+
+  /// Space padding from label to icon of item
   final double textPadding;
+
+  /// Animation curve
   final Curve curve;
+
+  /// Duration of the animation in milliseconds
   final int duration;
 
   const CircleNavigation({
@@ -60,6 +89,7 @@ class _CircleNavigationState extends State<CircleNavigation> {
   @override
   void initState() {
     super.initState();
+    // Initialize the index with the initial index provided
     _index = widget.initIndex;
   }
 
@@ -73,10 +103,12 @@ class _CircleNavigationState extends State<CircleNavigation> {
 
   @override
   Widget build(BuildContext context) => SizedBox(
+        // Height of the navigation bar including the height provided, the circle radius and the circle margin
         height: widget.height + widget.circleWidth / 2 + widget.circleMargin,
         width: double.infinity,
         child: Stack(
           children: [
+            // Background widget that handles the animated background
             Positioned.fill(
               child: Background(
                 index: _index,
@@ -92,19 +124,23 @@ class _CircleNavigationState extends State<CircleNavigation> {
                 circleColor: widget.circleColor,
               ),
             ),
+            // A list of NavItem with the opacity and slide animated
             ...List<Widget>.generate(
               widget.items.length,
               (index) => Positioned(
+                // Calculate the horizontal position of each item
                 left: context.offsetX(
                   context.percent(
                       widget.itemSpacing, index, widget.items.length),
                 ),
                 child: FractionalTranslation(
+                  // Translation -0.5 of x offset for the center alignment
                   translation: const Offset(-0.5, 0),
                   child: NavItem(
                     item: widget.items[index],
                     textStyle: widget.textStyle,
                     textPadding: widget.textPadding,
+                    // Handle item tap and update the selected index with trigger
                     onTap: index == _index
                         ? null
                         : () {
