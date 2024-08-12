@@ -1,39 +1,79 @@
-<!--
-This README describes the package. If you publish this package to pub.dev,
-this README's contents appear on the landing page for your package.
+A circle navigation bar with a simple animation
 
-For information about how to write a good package README, see the guide for
-[writing package pages](https://dart.dev/guides/libraries/writing-package-pages).
-
-For general information about developing packages, see the Dart guide for
-[creating packages](https://dart.dev/guides/libraries/create-library-packages)
-and the Flutter guide for
-[developing packages and plugins](https://flutter.dev/developing-packages).
--->
-
-TODO: Put a short description of the package here that helps potential users
-know whether this package might be useful for them.
-
-## Features
-
-TODO: List what your package can do. Maybe include images, gifs, or videos.
+<div style="text-align: center;">
+  <img src="doc/circle_navigation.gif" alt="An animated image of the iOS circle navigation bar UI" />
+</div>
 
 ## Getting started
 
-TODO: List prerequisites and provide or point to information on how to
-start using the package.
+To install, add it to your `pubspec.yaml` file:
+
+```
+dependencies:
+    circle_navigation:
+```
+
+To import it:
+
+```dart
+import 'package:circle_navigation/circle_navigation.dart';
+```
 
 ## Usage
 
-TODO: Include short and useful examples for package users. Add longer examples
-to `/example` folder.
+Use in bottomNavigationBar property of Scaffold widget:
 
 ```dart
-const like = 'sample';
+@override
+Widget build(BuildContext context) =>
+    Scaffold(
+      body: PageView(
+        controller: pageController,
+        physics: const NeverScrollableScrollPhysics(),
+        children: const [
+          Icon(Icons.home, color: Colors.green, size: 150),
+          Icon(Icons.account_circle, color: Colors.green, size: 150),
+          Icon(Icons.settings, color: Colors.green, size: 150),
+        ],
+      ),
+      bottomNavigationBar: CircleNavigation(
+        initIndex: initIndex,
+        items: [
+          Item(
+              icon: const Icon(
+                Icons.home,
+                color: Colors.white,
+                size: 30,
+              ),
+              label: 'Home'),
+          Item(
+              icon: const Icon(
+                Icons.account_circle,
+                color: Colors.white,
+                size: 30,
+              ),
+              label: 'User'),
+          Item(
+              icon: const Icon(
+                Icons.settings,
+                color: Colors.white,
+                size: 30,
+              ),
+              label: 'Settings'),
+        ],
+        textStyle: const TextStyle(
+          color: Colors.white,
+          fontSize: 16,
+          fontWeight: FontWeight.bold,
+        ),
+        circleColor: Colors.green,
+        navColor: Colors.blue,
+        onChange: (index) =>
+            pageController.animateToPage(
+              index,
+              duration: const Duration(milliseconds: 300),
+              curve: Curves.ease,
+            ),
+      ),
+    );
 ```
-
-## Additional information
-
-TODO: Tell users more about the package: where to find more information, how to
-contribute to the package, how to file issues, what response they can expect
-from the package authors, and more.
