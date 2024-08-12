@@ -1,7 +1,7 @@
 A circle navigation bar with a simple animation
 
 <div style="text-align: center;">
-  <img src="doc/circle_navigation.gif" alt="An animated image of the iOS circle navigation bar UI" />
+  <img src="https://raw.githubusercontent.com/hunghv-dev/circle_navigation/develop/doc/circle_navigation.gif" alt="An animated image of the iOS circle navigation bar UI" />
 </div>
 
 ## Getting started

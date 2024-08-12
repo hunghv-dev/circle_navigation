@@ -1,11 +1,10 @@
 name: circle_navigation
 description: "A circle navigation bar for Android and iOS with simple animation"
-version: 1.0.1
+version: 1.0.2
 repository: https://github.com/hunghv-dev/circle_navigation
 
 environment:
-  sdk: '>=3.3.4 <4.0.0'
-  flutter: ">=1.17.0"
+  sdk: '>=2.17.0 <4.0.0'
 
 dependencies:
   flutter:
