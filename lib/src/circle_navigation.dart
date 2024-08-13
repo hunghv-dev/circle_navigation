@@ -17,8 +17,8 @@ class CircleNavigation extends StatefulWidget {
   /// Height of the navigation bar
   final double height;
 
-  /// Optional horizontal spacing between items
-  final double? itemSpacing;
+  /// Trim value for start and end of the navigation bar
+  final double? trim;
 
   /// Width of the circle
   final double circleWidth;
@@ -56,7 +56,7 @@ class CircleNavigation extends StatefulWidget {
     required this.items,
     required this.onChange,
     this.height = 100,
-    this.itemSpacing,
+    this.trim,
     this.circleWidth = 80,
     this.circleMargin = 5,
     this.outlineRadius = 30,
@@ -72,8 +72,7 @@ class CircleNavigation extends StatefulWidget {
         assert(items.length >= 2, 'items must have at least 2 elements'),
         assert(circleWidth > 0, 'circleWidth must be greater than 0'),
         assert(height > circleWidth, 'height must be greater than circleWidth'),
-        assert(itemSpacing == null || itemSpacing >= 0,
-            'itemSpacing must be null or positive'),
+        assert(trim == null || trim >= 0, 'trim must be null or positive'),
         assert(circleMargin >= 0, 'circleMargin must be positive'),
         assert(outlineRadius >= 0, 'outlineRadius must be positive'),
         assert(textPadding >= 0, 'textPadding must be positive'),
@@ -113,7 +112,7 @@ class _CircleNavigationState extends State<CircleNavigation> {
               child: Background(
                 index: _index,
                 total: widget.items.length,
-                itemSpacing: widget.itemSpacing,
+                trim: widget.trim,
                 curve: widget.curve,
                 duration: widget.duration,
                 circleWidth: widget.circleWidth,
@@ -130,8 +129,7 @@ class _CircleNavigationState extends State<CircleNavigation> {
               (index) => Positioned(
                 // Calculate the horizontal position of each item
                 left: context.offsetX(
-                  context.percent(
-                      widget.itemSpacing, index, widget.items.length),
+                  context.percent(widget.trim, index, widget.items.length),
                 ),
                 child: FractionalTranslation(
                   // Translation -0.5 of x offset for the center alignment

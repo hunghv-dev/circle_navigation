@@ -8,9 +8,11 @@ extension BuildContextExt on BuildContext {
   double offsetX(double percent) => percent * _screenWidth;
 
   /// Method to calculate the position percentage of an item in a list
-  /// If spacing is null, it returns a uniform distribution percentage
-  /// Otherwise, it calculates the percentage based on the provided spacing
-  double percent(double? spacing, int index, int total) => spacing == null
+  /// If trim is null, it returns a uniform distribution percentage
+  /// Otherwise, it calculates the percentage based on the provided trim
+  double percent(double? trim, int index, int total) => trim == null
       ? (index + 1) / (total + 1)
-      : (index - (total - 1) * 0.5) * spacing / _screenWidth + 0.5;
+      : ((index - (total - 1) * 0.5) * (_screenWidth - 2 * trim)) /
+              (_screenWidth * (total - 1)) +
+          0.5;
 }

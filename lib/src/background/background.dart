@@ -9,8 +9,8 @@ class Background extends StatefulWidget {
   /// Total number of items
   final int total;
 
-  /// Optional spacing between items
-  final double? itemSpacing;
+  /// Trim value for start and end of the navigation bar
+  final double? trim;
 
   /// Animation curve
   final Curve curve;
@@ -40,7 +40,7 @@ class Background extends StatefulWidget {
     super.key,
     required this.index,
     required this.total,
-    this.itemSpacing,
+    this.trim,
     required this.curve,
     required this.duration,
     required this.circleWidth,
@@ -60,8 +60,7 @@ class _BackgroundState extends State<Background>
   late final AnimationController _animationController;
 
   // Calculate the animation percent value based on itemSpacing, current index and total items
-  double get _value =>
-      context.percent(widget.itemSpacing, widget.index, widget.total);
+  double get _value => context.percent(widget.trim, widget.index, widget.total);
 
   @override
   void initState() {

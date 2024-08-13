@@ -53,7 +53,7 @@ void main() {
     await tester.build(CircleNavigation(
       items: items,
       onChange: onChange,
-      itemSpacing: 10,
+      trim: 10,
     ));
     // Verify the layout of the widget
     expect(find.byType(CircleNavigation), findsOneWidget);
